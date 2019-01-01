@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-
-import static java.math.BigDecimal.ROUND_HALF_EVEN;
 
 
 @RestController
@@ -21,14 +18,12 @@ public class TestController {
 
     @RequestMapping("hello")
     public String say(){
-        System.out.println(new BigDecimal(5.76).divide(new BigDecimal(100d),4,ROUND_HALF_EVEN));
         return "HelloWorld";
     }
 
     @RequestMapping("getUser")
     public User getUser(String id){
-        User user = userService.getUserById(id);
-        return user;
+        return userService.getUserById(id);
 
     }
 
@@ -45,7 +40,7 @@ public class TestController {
     }
 
     @RequestMapping("adddUser")
-    public String addUser(HttpServletRequest request,User user) {
+    public String addUser(User user) {
         int result = userService.addUser(user);
         JSONObject json = new JSONObject();
         json.put("message","error");
